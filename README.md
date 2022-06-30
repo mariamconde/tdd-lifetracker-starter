@@ -12,7 +12,7 @@ This application will be built using the battle-tested PERN stack - PostgreSQL, 
 
 Building this application you will accomplish the following:
 
-- [ ] Develop a full-fledged authentication system using PostgreSQL and Bcrypt
+- [x] Develop a full-fledged authentication system using PostgreSQL and Bcrypt
 - [ ] Provide users with an Express API they can interact with to store user-related activity
 - [ ] Construct multiple Models that implement the core business logic associated with tracking users' lives
 - [ ] Write SQL queries that aggregate user statistics and provide summary overviews about their activity
@@ -106,31 +106,31 @@ The components in the `App.jsx` file should render the following components (alo
 
 - To build out the front-end, start with the `App.jsx` component:
 
-  - [ ] **`App.jsx`**
-    - [ ] Should be wrapped by an element with the `className` of `app`
-    - [ ] The core App component that contains the routes for the app wrapped in Context providers
-    - [ ] Renders the `Navbar` component on every route
-    - [ ] Renders a `BrowserRouter` component that contains a `Routes` component with the following routes:
-      - [ ] `/` - Should render the `Landing.jsx` component
-      - [ ] `/login` - Should render the `LoginPage.jsx` component
-      - [ ] `/register` - Should render the `RegistrationPage.jsx` component
-      - [ ] `/activity` - Should render the `ActivityPage.jsx` component (only if the user is logged in, otherwise it renders the `AccessForbidden.jsx` component)
-      - [ ] `/nutrition/* - should render the `NutritionPage.jsx`component (only if the user is logged in, otherwise it renders the`AccessForbidden.jsx` component)
-      - [ ] `*` - anything else should render the `NotFound` component
-  - [ ] To standarize API requests throughout the application, set up an **`ApiClient`** class
+  - [x] **`App.jsx`**
+    - [x] Should be wrapped by an element with the `className` of `app`
+    - [x] The core App component that contains the routes for the app wrapped in Context providers
+    - [x] Renders the `Navbar` component on every route
+    - [x] Renders a `BrowserRouter` component that contains a `Routes` component with the following routes:
+      - [x] `/` - Should render the `Landing.jsx` component
+      - [x] `/login` - Should render the `LoginPage.jsx` component
+      - [x] `/register` - Should render the `RegistrationPage.jsx` component
+      - [x] `/activity` - Should render the `ActivityPage.jsx` component (only if the user is logged in, otherwise it renders the `AccessForbidden.jsx` component)
+      - [x] `/nutrition/* - should render the `NutritionPage.jsx`component (only if the user is logged in, otherwise it renders the`AccessForbidden.jsx` component)
+      - [x] `*` - anything else should render the `NotFound` component
+  - [x] To standarize API requests throughout the application, set up an **`ApiClient`** class
 
-    - [ ] Start by creating a `constants.js` file at the root of the project
-      - [ ] In it, export a few variables:
-      - [ ] `PRODUCTION_API_BASE_URL` - set to whatever url the production API is deployed at
-      - [ ] `DEVELOPMENT_API_BASE_URL` - set to "http://localhost:3001" for development
-      - [ ] `API_BASE_URL` - if `process.env.NODE_ENV` is `production`, set this to `PRODUCTION_API_BASE_URL`, otherwise set it to `DEVELOPMENT_API_BASE_URL`
-    - [ ] Next, create a `services` directory at the root of the project
-    - [ ] Inside that directory, touch an `apiClient.js` file
-    - [ ] In that file, import the `axios` package and the `API_BASE_URL` constant from the `constants.js` file
-    - [ ] Define a new class in that file called `ApiClient`.
-      - [ ] Give it a constructor function that accepts a single parameter - `remoteHostUrl`. The constructor should attach the `remoteHostUrl` parameter to a new instance with `this.remoteHostUrl = remoteHostUrl`. It should also set `this.token = null`.
-      - [ ] Export default a new instance of the `ApiClient` class
-      - [ ] Add an additional method called `setToken` that accepts a single parameter - `token` and attaches it to the instance.
+    - [x] Start by creating a `constants.js` file at the root of the project
+      - [x] In it, export a few variables:
+      - [x] `PRODUCTION_API_BASE_URL` - set to whatever url the production API is deployed at
+      - [x] `DEVELOPMENT_API_BASE_URL` - set to "http://localhost:3001" for development
+      - [x] `API_BASE_URL` - if `process.env.NODE_ENV` is `production`, set this to `PRODUCTION_API_BASE_URL`, otherwise set it to `DEVELOPMENT_API_BASE_URL`
+    - [x] Next, create a `services` directory at the root of the project
+    - [x] Inside that directory, touch an `apiClient.js` file
+    - [x] In that file, import the `axios` package and the `API_BASE_URL` constant from the `constants.js` file
+    - [x] Define a new class in that file called `ApiClient`.
+      - [x] Give it a constructor function that accepts a single parameter - `remoteHostUrl`. The constructor should attach the `remoteHostUrl` parameter to a new instance with `this.remoteHostUrl = remoteHostUrl`. It should also set `this.token = null`.
+      - [] Export default a new instance of the `ApiClient` class
+      - [] Add an additional method called `setToken` that accepts a single parameter - `token` and attaches it to the instance.
       - [ ] Create a utility method called `request` that uses `axios` to issue HTTP requests
       - [ ] Add a `login` method that uses the `request` method to send an HTTP request to the `auth/login` endpoint
       - [ ] Add a `signup` method that uses the `request` method to send an HTTP request to the `auth/register` endpoint
@@ -165,28 +165,28 @@ The components in the `App.jsx` file should render the following components (alo
     - [ ] Create and export a `useAuthContext` hook that calls the `React.useContext` hook with the newly created `AuthContext` and returns it.
     - [ ] In `App.jsx` file create an `AppContainer` component that wraps the `App` component with the `AuthContextProvider` component (which should still be nested inside the `BrowserRouter` component from `react-router-dom`). Export the `AppContainer` component by default instead of the `App`
 
-  - [ ] The **`Loading.jsx`** component
+  - [x] The **`Loading.jsx`** component
 
-    - [ ] Should render JSX that is wrapped by an element with the `className` of `loading`
-    - [ ] Should render an element with the `className` of `loading-message` that contains the text `"Loading"`
+    - [x] Should render JSX that is wrapped by an element with the `className` of `loading`
+    - x ] Should render an element with the `className` of `loading-message` that contains the text `"Loading"`
 
-  - [ ] The **`Navbar.jsx`** component
+  - [x] The **`Navbar.jsx`** component
 
-    - [ ] Should render JSX that is wrapped by a `nav` element with the `className` of `navbar`
-    - [ ] Should render the app's logo:
-      - [ ] It should be an element with the `className` of `logo`.
-      - [ ] Inside that element should be a `Link` component from `react-router-dom` that navigates the user to the `/` route when clicked.
-      - [ ] Inside that `Link` component should be the application's logo (text or image)
-    - [ ] Should render the `NavLinks.jsx` component with links to each of the resources and the `/activity` route
+    - [x] Should render JSX that is wrapped by a `nav` element with the `className` of `navbar`
+    - [x] Should render the app's logo:
+      - [x] It should be an element with the `className` of `logo`.
+      - [x] Inside that element should be a `Link` component from `react-router-dom` that navigates the user to the `/` route when clicked.
+      - [x] Inside that `Link` component should be the application's logo (text or image)
+    - [x] Should render the `NavLinks.jsx` component with links to each of the resources and the `/activity` route
 
-  - [ ] The **`NavLinks.jsx`** component:
+  - [x] The **`NavLinks.jsx`** component:
 
-    - [ ] Should render JSX that is wrapped by an element with a `className` of `nav-links`
-    - [ ] Should render a `Link` element from `react-router-dom` for:
-      - [ ] The `/activity` route. It should have a label of `Activity`.
-      - [ ] The `/nutrition` route. It should have a label of `Nutrition`.
-      - [ ] A route for any other resource page
-    - [ ] If a valid user is logged in:
+    - [x] Should render JSX that is wrapped by an element with a `className` of `nav-links`
+    - [x] Should render a `Link` element from `react-router-dom` for:
+      - [x] The `/activity` route. It should have a label of `Activity`.
+      - [x] The `/nutrition` route. It should have a label of `Nutrition`.
+      - [x] A route for any other resource page
+    - [x] If a valid user is logged in:
       - [ ] It should render an element with the `className` of `logout-button` that calls the `logoutUser` function when clicked.
         - [ ] That function should remove the `lifetracker_token` from local storage and refresh the page so that all user data is reset.
     - [ ] If no valid user is logged in:
