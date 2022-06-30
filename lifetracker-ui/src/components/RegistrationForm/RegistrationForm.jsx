@@ -8,8 +8,8 @@ export default function RegistrationForm(props) {
     const [form, setForm] = useState({
         email: "",
         username: "",
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         password: "",
         passwordConfirm: "",
       })
@@ -56,16 +56,20 @@ export default function RegistrationForm(props) {
             setError((state) => ({ ...state, passwordConfirm: "passwords don't match." }))
             return
         } 
+        else if (!form.password){
+            setError((state) => ({ ...state, passwordConfirm: "You must enter a password." }))
+            return
+        }
         else {
             setError((state) => ({ ...state, passwordConfirm: null }))
         }
 
         try{
-            const json = await axios.post("http://localhost:3002/auth/register", {
+            const json = await axios.post("http://localhost:3001/auth/register", {
                 email: form.email,
                 username: form.username,
-                firstName: form.firstName,
-                lastName: form.lastName,
+                first_name: form.first_name,
+                last_name: form.last_name,
                 password: form.password,
             })
             if(json?.data?.user){
@@ -73,8 +77,8 @@ export default function RegistrationForm(props) {
                 setForm({
                     email: "",
                     username: "",
-                    firstName: "",
-                    lastName: "",
+                    first_name: "",
+                    last_name: "",
                     password: "",
                     passwordConfirm: "",
                   })
@@ -92,7 +96,7 @@ export default function RegistrationForm(props) {
     return (
         <div className="registration-form">
             <h1>Sign Up</h1>
-            <img src="\src\assets\icons8-sign-up-60.png"></img>
+            <img src="\src\assets\icons8-sign-up-60.png" alt="sign up"></img>
             <form>
                 <div className="form-inputs">
                     <input className="form-input" type="email" name="email"
@@ -104,13 +108,13 @@ export default function RegistrationForm(props) {
                             placeholder="username"
                             value={form.username}
                             onChange={handleOnInputChange}/>
-                    <input className="form-input" type="text" name="firstName"
+                    <input className="form-input" type="text" name="first_name"
                             placeholder="Jane"
-                            value={form.firstName}
+                            value={form.first_name}
                             onChange={handleOnInputChange}/>
-                    <input className="form-input" type="text" name="lastName"
+                    <input className="form-input" type="text" name="last_name"
                             placeholder="Doe"
-                            value={form.lastName}
+                            value={form.last_name}
                             onChange={handleOnInputChange}/>
                     <input className="form-input" type="password" name="password"
                             placeholder="password"
@@ -124,6 +128,7 @@ export default function RegistrationForm(props) {
                     {error.passwordConfirm ? (<p className="error">{error.passwordConfirm}</p>) : null}
                 </div>
                 <button className="submit-registration" onClick={signupUser}>Create Account</button>
+                {error.form ? (<p className="error">{error.form}</p>) : null}
             </form>
         </div>
     )}

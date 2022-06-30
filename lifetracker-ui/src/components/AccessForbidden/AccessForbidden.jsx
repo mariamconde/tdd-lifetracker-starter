@@ -1,8 +1,6 @@
 import * as React from "react";
 
-
-
-export default function AccessForbidden() {
+export default function AccessForbidden(props) {
     return ( <div className="access-forbid">
         <div className="access-cont">
             <div className="access-text">

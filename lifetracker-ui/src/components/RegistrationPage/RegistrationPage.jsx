@@ -1,10 +1,15 @@
-import RegistrationForm from "components/RegistrationForm/RegistrationForm"
-import * as React from "react"
-import "./RegistrationPage.css"
+import * as React from "react";
+import {Redirect} from 'react'
+import axios from "axios";
+import { useState, useEffect } from 'react';
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
+import "./RegistrationPage.css";
 
-export default function RegistrationPage(props) {
+export default function RegistrationPage({loggedIn, setAppState}) {
+    //state to check if user is logged in
     return (
-        <div className="registration-page">
-            {props.isLoggedIn ? (<ActivityPage/>) : (<RegistrationForm setIsLoggedIn={props.setIsLoggedIn} setAppState={props.setAppState}/>)}
+        <div className="register-page">
+            <RegistrationForm loggedIn={loggedIn} setAppState={setAppState}/>
         </div>
-    )}
+    );
+}

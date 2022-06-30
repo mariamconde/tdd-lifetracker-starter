@@ -29,10 +29,12 @@ export default function App() {
               <Navbar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}></Navbar>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<LoginPage isLoggedIn = {isLoggedIn} handleLoggedIn={handleLoggedIn}/>} />
-                <Route path="/register" element={<RegistrationPage isLoggedIn = {isLoggedIn}/>} />
-                <Route path="/activity" element={<ActivityPage />} />
-                {/* <Route path="/nutrition/*" element={<NutritionPage/>}/> */}
+                <Route path="/login" element={<LoginPage isLoggedIn = {isLoggedIn} setIsLoggedIn={setIsLoggedIn} handleLoggedIn={handleLoggedIn} setAppState={setAppState}/>} />
+                <Route path="/register" element={<RegistrationPage isLoggedIn = {isLoggedIn}  setIsLoggedIn={setIsLoggedIn} setAppState={setAppState}/>} />
+                <Route path="/activity" element={isLoggedIn ? (<ActivityPage/>) : (<AccessForbidden/>)} ></Route>
+                <Route path="/exercise" element={isLoggedIn ? (<ActivityPage/>) : (<AccessForbidden/>)} ></Route>
+                <Route path="/nutrition/*" element={isLoggedIn ? (<NutritionPage/>) : (<AccessForbidden/>)}></Route>
+                <Route path="/sleep" element={isLoggedIn ? (<ActivityPage/>) : (<AccessForbidden/>)} ></Route>
                 <Route path="*" element={<NotFound/>}></Route>
               </Routes>
             </main>
