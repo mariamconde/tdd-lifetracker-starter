@@ -11,6 +11,7 @@ import RegistrationPage from "components/RegistrationPage/RegistrationPage";
 import NotFound from "components/NotFound/NotFound";
 import AccessForbidden from "components/AccessForbidden/AccessForbidden";
 import ActivityPage from "components/ActivityPage/Activitypage";
+import NutritionPage from "components/NutritionPage/NutritionPage";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
