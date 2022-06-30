@@ -13,8 +13,8 @@ function getDatabaseUri() {
     : "postgres";
   const dbHost = process.env.DATABASE_HOST || "localhost";
   const dbPort = process.env.DATABASE_PORT || 5432;
-  const dbTestName = process.env.DATABASE_TEST_NAME || "life_tracker_test";
-  const dbProdName = process.env.DATABASE_NAME || "life_tracker";
+  const dbTestName = process.env.DATABASE_TEST_NAME || "lifetracker_test";
+  const dbProdName = process.env.DATABASE_NAME || "lifetracker";
   const dbName = process.env.NODE_ENV === "test" ? dbTestName : dbProdName;
 
   return (
