@@ -95,34 +95,34 @@ export default function RegistrationForm(props) {
 
     return (
         <div className="registration-form">
-            <h1>Sign Up</h1>
-            <img src="\src\assets\icons8-sign-up-60.png" alt="sign up"></img>
+          <div className="card">
+            <h2>Create Account</h2>
             <form>
                 <div className="form-inputs">
                     <input className="form-input" type="email" name="email"
-                            placeholder="user@gmail.com"
+                            placeholder="Enter a valid email"
                             value={form.email}
                             onChange={handleOnInputChange}/>
                     {error.email ? (<p className="error">{error.email}</p>) : null}
                     <input className="form-input" type="text" name="username"
-                            placeholder="username"
+                            placeholder="your_username"
                             value={form.username}
                             onChange={handleOnInputChange}/>
                     <input className="form-input" type="text" name="first_name"
-                            placeholder="Jane"
+                            placeholder="First Name"
                             value={form.first_name}
                             onChange={handleOnInputChange}/>
                     <input className="form-input" type="text" name="last_name"
-                            placeholder="Doe"
+                            placeholder="Last Name"
                             value={form.last_name}
                             onChange={handleOnInputChange}/>
                     <input className="form-input" type="password" name="password"
-                            placeholder="password"
+                            placeholder="Enter a secure password"
                             value={form.password}
                             onChange={handleOnInputChange}/>
                     {error.password ? (<p className="error">{error.password}</p>) : null}
                     <input className="form-input" type="password" name="passwordConfirm"
-                            placeholder="confirm password"
+                            placeholder="Confirm your password"
                             value={form.passwordConfirm}
                             onChange={handleOnInputChange}/>
                     {error.passwordConfirm ? (<p className="error">{error.passwordConfirm}</p>) : null}
@@ -131,4 +131,6 @@ export default function RegistrationForm(props) {
                 {error.form ? (<p className="error">{error.form}</p>) : null}
             </form>
         </div>
+      </div>
+
     )}

@@ -8,7 +8,7 @@ import "./RegistrationPage.css";
 export default function RegistrationPage({loggedIn, setAppState}) {
     //state to check if user is logged in
     return (
-        <div className="register-page">
+        <div className="registration-page">
             <RegistrationForm loggedIn={loggedIn} setAppState={setAppState}/>
         </div>
     );

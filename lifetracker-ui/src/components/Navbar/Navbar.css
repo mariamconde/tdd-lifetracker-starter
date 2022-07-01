@@ -1,7 +1,7 @@
 .Navbar {
     width: 100%;
     max-width: 100vw;
-    background: #2c4147;
+    background: rgb(197, 116, 130);
     color: #ffffff;
     height: var(--navbar-height);
     display: flex;
