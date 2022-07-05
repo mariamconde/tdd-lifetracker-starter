@@ -40,10 +40,7 @@ Implement any of the following features to improve the application:
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/72282608/177362016-fab8fb4f-fd4f-4777-8e22-1344ceffea50.gif)
-
+loom video : https://www.loom.com/share/cd0a592dfaf94116920a45b1ff8c4a31
 
 ### Reflection
 
