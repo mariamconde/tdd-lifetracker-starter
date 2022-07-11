@@ -1,56 +1,35 @@
+import SummaryStat from "components/SummaryStat/SummaryStat"
 import * as React from "react"
-import "./App.css"
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { useState, useEffect } from "react"
-import API from "../../services/apiClient";
-import { AuthContextProvider, useAuthContext } from "../../contexts/auth";
-import { ActivityContextProvider, useActivityContext } from "../../contexts/activity";
+import "./ActivityFeed.css"
 
+export default function ActivityFeed({totalCaloriesPerDay, avgCaloriesPerCategory, aggData}) {
+    console.log(totalCaloriesPerDay, avgCaloriesPerCategory, aggData)
+    if(!aggData.sumCalories){
+        aggData.sumCalories = 0
+        aggData.maxCalories = 0
+        aggData.avgCalories = 0
+    }
 
-import Navbar from "components/Navbar/Navbar"
-import Landing from "components/Landing/Landing"
-import LoginPage from "components/LoginPage/LoginPage";
-import RegistrationPage from "components/RegistrationPage/RegistrationPage";
-import NotFound from "components/NotFound/NotFound";
-import ActivityPage from "components/ActivityPage/ActivityPage";
-import AccessForbidden from "components/AccessForbidden/AccessForbidden";
-import NutritionPage from "components/NutritionPage/NutritionPage";
-import { NutritionontextProvider } from "../../contexts/nutrition";
-
-export default function AppContainer() {
-  return (
-    <AuthContextProvider>
-      <ActivityContextProvider>
-        <NutritionontextProvider>
-        <App />
-        </NutritionontextProvider>
-      </ActivityContextProvider>
-    </AuthContextProvider>
-  )
-}
-
-function App() {
-  const {user, setUser} = useAuthContext()
-  const [isLoading, setIsLoading] = useState(false)
-
-
-  return (
-    <div className="app">
-      <React.Fragment>
-        <BrowserRouter>
-          <main>
-            <Navbar/>
-            <Routes>
-              <Route path="/" element={<Landing/>}></Route>
-              <Route path="/login" element={<LoginPage/>}></Route>
-              <Route path="/register" element={<RegistrationPage/>}></Route>
-              <Route path="/activity" element={user?.email ? (<ActivityPage/>) : (<AccessForbidden/>)} ></Route>
-              <Route path="/nutrition/*" element={user?.email ? (<NutritionPage/>) : (<AccessForbidden/>)}></Route>
-              <Route path="*" element={<NotFound/>}></Route>
-            </Routes>
-          </main>
-        </BrowserRouter>
-      </React.Fragment>
-    </div>
-  )
-}
+    console.log(aggData)
+    return (
+        <div className="activity-feed">
+            <h1>Activities</h1>
+            <div className="agg-stats">
+                <SummaryStat stat={aggData.sumCalories} label="Total Calories" />
+                <SummaryStat stat={aggData.maxCalories} label="Max Daily calories"/>
+                <SummaryStat stat={aggData.avgCalories} label="Avg Daily calories"/>
+            </div>
+            <div className="per-category">
+                <h4>Average Calories Per Category</h4>
+                <div className="stat-grid">
+                    {avgCaloriesPerCategory.map((item, idx)=>{return <SummaryStat stat={item.avgCaloriesPerCategory} key={idx}label="Calories" substat={item.category}/>})}
+                </div> 
+           </div>
+            <div className="per-day">
+                <h4>Total Calories Per Day</h4>
+                <div className="stat-grid">
+                {totalCaloriesPerDay.map((item, idx)=>{return <SummaryStat stat={item.totalCaloriesPerDay} key={idx}label="Calories" substat={item.date}/>})}
+                </div>
+            </div>
+        </div>
+    )}

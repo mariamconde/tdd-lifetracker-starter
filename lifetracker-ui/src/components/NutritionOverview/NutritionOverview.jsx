@@ -7,10 +7,10 @@ import { useNutritionContext } from "../../contexts/nutrition"
 import Loading from "components/Loading/Loading"
 import { useState } from "react"
 
-export default function NutritionOverview() {
+export default function NutritionOverview({nutrition}) {
   const {nutritions, isLoading, error} = useNutritionContext()
-  const [copy, setCopy] = useState([...nutritions])
-  console.log(nutritions)
+  const [copy, setCopy] = useState(nutritions)
+  console.log("copy", copy)
 
   const handleFilter = (event) => {
     if(event.target.value == "less"){
@@ -33,13 +33,7 @@ export default function NutritionOverview() {
         <h1>Overview</h1>
         {error? <p className="error">{error}</p> : null}
         <Link to="/nutrition/create"><button id="record">Record Nutrition</button></Link>
-        <select name="filter-nutrition" id="filter-nutrition" onChange={(e)=>handleFilter(e)}>
-          <option value="" disabled selected>Filter by calories</option>
-          <option value="all">Show all</option>
-          <option value="less">Less than 100</option>
-          <option value="mid">100 ~ 500</option>
-          <option value="more">More than 500</option>
-        </select>
+         
         
         {isLoading? <Loading/> : <NutritionFeed nutritions={copy}></NutritionFeed>}
     </div>
