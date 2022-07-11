@@ -40,6 +40,8 @@ Implement any of the following features to improve the application:
 
 loom video : https://www.loom.com/share/cd0a592dfaf94116920a45b1ff8c4a31
 
+week 5 loom video: https://www.loom.com/share/26439793c151404095b4b5e8c567223c
+
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
