@@ -23,15 +23,7 @@ export default function NutritionDetail() {
         setNotFound(false)
       }
       setIsLoading(false)
-        // try{
-        //     let json = await axios.get('http://localhost:3001/nutrition/id/'+nutritionId)
-        //     setNutrition(json.data.nutrition)
-        //     console.log(nutritionId, json.data)
-        //   }
-        // catch(err){
-        //   console.log(err)
-        //   setNotFound(true)
-        // }
+     
       }
   
   useEffect(() => {

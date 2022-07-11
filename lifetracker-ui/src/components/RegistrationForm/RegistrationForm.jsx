@@ -88,34 +88,7 @@ export default function RegistrationForm() {
           setUser(data.user)
           API.setToken(data.token)
         }
-        // try{
-        //     const json = await axios.post("http://localhost:3001/auth/register", {
-        //         email: form.email,
-        //         username: form.username,
-        //         firstName: form.firstName,
-        //         lastName: form.lastName,
-        //         password: form.password,
-        //     })
-        //     if(json?.data?.user){
-        //         props.setAppState(json.data)
-        //         setForm({
-        //             email: "",
-        //             username: "",
-        //             firstName: "",
-        //             lastName: "",
-        //             password: "",
-        //             passwordConfirm: "",
-        //           })
-        //           props.setUser(json.data.user)
-        //         navigate("/")
-        //     }
-        //     else{
-        //         setError((state) => ({ ...state, form: "Something went wrong with registration." }))
-        //     }
-        // }catch(err) {
-        //     const message = err?.response?.data?.error?.message
-        //     setError((state) => ({ ...state, form: message ? String(message) : String(err) }))
-        // }
+
     }
 
     return (
