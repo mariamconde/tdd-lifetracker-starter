@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const authRoutes = require("./routes/auth")
 const nutritionRoutes = require("./routes/nutrition")
 const security = require("./middleware/security")
+const activityRoutes = require("./routes/activity")
 
 const {BadRequestError, NotFoundError} = require('./utils/errors')
 
@@ -17,9 +18,10 @@ app.use(express.json())
 app.use(morgan('tiny'))
 app.use(security.extractUserFromJwt)
 
-
+app.use("/activity", activityRoutes)
 app.use("/auth", authRoutes)
 app.use("/nutrition", nutritionRoutes)
+
 
 //APP GET REQUESTS
 app.get('/', async(req,res) => {

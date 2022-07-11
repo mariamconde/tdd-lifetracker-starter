@@ -36,4 +36,14 @@ router.get("/me", security.requireAuthenticatedUser, async (req, res, next) => {
     }
 })
 
+router.get("/users", security.requireAuthenticatedUser, async (req, res, next) => {
+    try{
+        const users = await User.listUsers()
+        return res.status(200).json({users})
+    } catch(err){
+        next(err)
+    }
+
+})
+
 module.exports = router
