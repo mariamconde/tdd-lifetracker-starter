@@ -1,53 +1,44 @@
-import {createContext, useState, useContext, useEffect} from 'react'
+import * as React from "react"
+import { createContext, useState, useContext, useEffect } from "react";
+import API from "../services/apiClient"
 
-const AuthContext = createContext(null);
+const AuthContext = createContext(null)
 
 export const AuthContextProvider = ({children}) => {
-    const [user, setUser] = useState({});
-    const [initialized, setInitialized] = useState();
-    const [isProcessing, setIsProcessing] = useState();
-    const [error, setError] = useState();
+    const [user, setUser] = useState({})
+
 
     useEffect(() => {
-        console.log("useEffect")
-    }, [])
+        const fetchUser = async () => {
+          const { data, error } = await API.fetchUserFromToken()
+          if (data) {
+            setUser(data.user)
+          }
+          if(error){
+            //setError(error)
+          }
+        }
+    
+        const token = localStorage.getItem("my_token")
+        if (token) {
+          API.setToken(token)
+          fetchUser()
+        }
+      }, [setUser])
 
-    function loginUser() {
-        console.log("login context");
-    }
-
-    function signupUser() {
-        console.log("signup context");
-    }
-
-    function fetchUserFromToken() {
-        console.log("fetch context");
-    }
-
-    function logoutUser() {
-        console.log("logout context");
-    }
-
-    const authValue = {user, 
-        setUser, 
-        initialized, 
-        setInitialized,
-        isProcessing,
-        setIsProcessing,
-        error,
-        setError,
-        loginUser,
-        signupUser,
-        fetchUserFromToken,
-        logoutUser
-    }
+      const handleLogout = async () => {
+        await API.logoutUser()
+        setUser({})
+        //setError(null)
+      } 
+    
+      const authValue = {user, setUser, handleLogout}
 
     return (
         <AuthContext.Provider value={authValue}>
             <>{children}</>
         </AuthContext.Provider>
     )
-
 }
 
 export const useAuthContext = () => useContext(AuthContext)

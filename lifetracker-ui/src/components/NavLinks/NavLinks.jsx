@@ -1,22 +1,24 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import "./Navlinks.css";
+import { useAuthContext } from "../../contexts/auth"
+import * as React from "react"
+import { Link } from "react-router-dom"
+import "./NavLinks.css"
 
-export default function Navlinks(props) {
-  const logoutUser = () => {
-    // placeholder, handle with context
-    props.setIsLoggedIn(false)
-}
-  return (
-    <ul className="links">
-      <li> <Link to="/activity">Activity</Link> </li>
-      <li> <Link to="/exercise">Exercise</Link> </li>
-      <li> <Link to="/nutrition">Nutrition</Link> </li>
-      <li> <Link to="/sleep">Sleep</Link> </li>
-      <li> <Link to="/login">Login</Link> </li>
-      <li className="btn secondary">
-        <Link to="/register">Sign Up</Link>
-      </li>
-    </ul>
-  );
-}
+export default function NavLinks() {
+  const {user, handleLogout} = useAuthContext()
+    return (
+      <nav className="nav-links">
+        <ul>
+          <li><Link to="/activity" label="Activity">Activity</Link></li>
+          <li><Link to="/nutrition" label="Nutrition">Nutrition</Link></li>
+          {user.email ? 
+          (<li onClick={handleLogout}><Link to="/" className="nav-btn">Logout</Link></li>) : 
+          (
+            <>
+            <li><Link to="/login" label="Login">Login</Link></li>
+            <li ><Link to="/register" label="Sign Up" className="nav-btn">Sign Up</Link></li>
+            </>
+        )}      
+        </ul>
+      </nav>
+    )
+  }

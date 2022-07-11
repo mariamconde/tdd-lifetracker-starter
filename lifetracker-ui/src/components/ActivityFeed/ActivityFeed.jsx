@@ -8,7 +8,7 @@ import { ActivityContextProvider, useActivityContext } from "../../contexts/acti
 
 
 import Navbar from "components/Navbar/Navbar"
-import LandingPage from "components/LandingPage/LandingPage";
+import Landing from "components/Landing/Landing"
 import LoginPage from "components/LoginPage/LoginPage";
 import RegistrationPage from "components/RegistrationPage/RegistrationPage";
 import NotFound from "components/NotFound/NotFound";
@@ -41,7 +41,7 @@ function App() {
           <main>
             <Navbar/>
             <Routes>
-              <Route path="/" element={<LandingPage/>}></Route>
+              <Route path="/" element={<Landing/>}></Route>
               <Route path="/login" element={<LoginPage/>}></Route>
               <Route path="/register" element={<RegistrationPage/>}></Route>
               <Route path="/activity" element={user?.email ? (<ActivityPage/>) : (<AccessForbidden/>)} ></Route>

@@ -1,86 +1,47 @@
-import {createContext, useState, useContext, useEffect} from 'react'
-import apiClient from "../services/apiClient";
+import * as React from "react"
+import { createContext, useState, useContext, useEffect } from "react";
+import API from "../services/apiClient"
+import { useAuthContext} from "./auth";
 
-const NutritionContext = createContext(null);
+const NutritionContext = createContext(null)
 
-export const NutritionContextProvider = ({children}) => {
-    const [nutritions, setNutritions] = useState([]);
-    const [initialized, setInitialized] = useState();
-    const [isProcessing, setIsProcessing] = useState();
-    const [error, setError] = useState({nutrition: ""});
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    useEffect(() => {
-        console.log("useEffect nutrition")
-        //check if user is logged in
-        const fetchUser = async () => {
-            const {data, err} = await apiClient.fetchUserFromToken()
-            if (data) setLoggedIn(true);
-            if (err) setError(err);
-        }
-        const fetchNutr = async () => {
-            const {data, err} = await apiClient.fetchNutrition();
-            console.log(loggedIn, data);
-            if (data) setNutritions(data.nutritions);
-            if (err) setError(err);
-        }
+export const NutritionontextProvider = ({children}) => {
+    const [nutritions, setNutritions] = useState([])
+    const [initialized, setInitialized] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const {user} = useAuthContext()
+const fetchNutritions = async () => {
+                    setIsLoading(true)
+                    setError(null)
+                    const {data, error} = await API.fetchNutrition()
+                    if(data){
+                        setNutritions(data.nutrition)
+                    }
+                    if(error){
+                        setError(error)
+                    }
+                setInitialized(true)
+                setIsLoading(false)
+            }
+    useEffect(() => {    
         
-          
-      
-          const token = localStorage.getItem("lifetracker_token");
-          if(token) {
-            apiClient.setToken(token)
-            fetchUser()
-          }
-          if (loggedIn){
-              setIsProcessing(true);
-              fetchNutr();
-              console.log("nutritions", nutritions)
-              //get request to nutritions endpoint
-              //set nutrititions to the data
-          }
-          
-          setIsProcessing(false)
-          setInitialized(true)
 
-    }, [loggedIn, initialized])
+            const token = localStorage.getItem("my_token")
+            if (token && user) {
+              API.setToken(token)
+              fetchNutritions()
+            }
 
-    function newNutrition(info) {
-        const fetchNew = async () => {
-            const {data, err} = await apiClient.newNutrition(info);
+    }, [setNutritions])
 
-        }
-        const fetchNutr = async () => {
-            const {data, err} = await apiClient.fetchNutrition();
-            console.log(loggedIn, data);
-            if (data) setNutritions(data.nutritions);
-            if (err) setError(err);
-        }
-        fetchNew();
-        fetchNutr();
-        console.log("nutritions after new", nutritions);
-
-    }
-
-
-    const nutValue = {nutritions, 
-        setNutritions, 
-        initialized, 
-        setInitialized,
-        isProcessing,
-        setIsProcessing,
-        error,
-        setError,
-        newNutrition
-        
-    }
-
+    const nutritionValue = {fetchNutritions, nutritions, setNutritions, initialized, setInitialized, isLoading, setIsLoading, error, setError}
+    
     return (
-        <NutritionContext.Provider value={nutValue}>
+        <NutritionContext.Provider value={{nutritionValue}}>
             <>{children}</>
         </NutritionContext.Provider>
     )
-
 }
 
 export const useNutritionContext = () => useContext(NutritionContext)

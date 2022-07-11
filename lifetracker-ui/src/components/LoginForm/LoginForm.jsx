@@ -1,14 +1,30 @@
 import * as React from "react"
-import { useState } from "react"
-import axios from "axios"
+import { useState, useEffect } from "react"
+import API from "../../services/apiClient"
 import "./LoginForm.css"
+import { useNavigate, Link } from "react-router-dom"
+import { useAuthContext } from "../../contexts/auth"
+import { useActivityContext } from "../../contexts/activity"
+import { useNutritionContext } from "../../contexts/nutrition"
 
 
+export default function LoginForm() {
+    const {user, setUser} = useAuthContext()
 
-export default function LoginForm(props) {
     const [form, setForm] = useState({email: "", password: ""})
     const [error, setError] = useState({})
+    const navigate = useNavigate()
+    const{fetchActivity} = useActivityContext()
+    const {nutritionValue} = useNutritionContext()
     
+    useEffect(() => {
+        if(user?.email){
+            fetchActivity()
+            nutritionValue.fetchNutritions()
+            navigate("/activity")
+        }
+    }, [user, navigate])
+
     const handleOnInputChange = (event) => {
         // Check for valid email
         if (event.target.name == "email") {
@@ -31,30 +47,42 @@ export default function LoginForm(props) {
             setError((state) => ({ ...state, password: "You must enter a password." }))
             return
         }
-        //placeholder, handled by contexts
-        try{
-            const json = await axios.post("http://localhost:3001/auth/login", {
-                email: form.email,
-                password: form.password,
-            })
-            if(json?.data?.user){
-                props.setAppState(json.data)
-                setForm({
-                    email: "",
-                    password: ""
-                  })
-                console.log(json.data)
-                props.setIsLoggedIn(true)
-            }
-            else{
-                setError((state) => ({ ...state, form: "Something went wrong with registration." }))
-            }
-        }catch(err) {
-            const message = err?.response?.data?.error?.message
-            setError((state) => ({ ...state, form: message ? String(message) : String(err) }))
-            console.log(err)
+        console.log(form)
+        const {data, error} = await API.loginUser({email: form.email,
+                    password: form.password})
+        if(error) setError((state) => ({ ...state, form: error }))
+        if (data?.user){
+            setUser(data.user)
+            API.setToken(data.token)
         }
-        console.log(error)
+        console.log(data, error)
+        //placeholder, handled by contexts
+        // try{
+        //     const json = await axios.post("http://localhost:3001/auth/login", {
+        //         email: form.email,
+        //         password: form.password,
+        //     })
+        //     if(json?.data?.user){
+        //         props.setAppState(json.data)
+        //         setForm({
+        //             email: "",
+        //             password: ""
+        //           })
+        //         console.log(json.data)
+        //         navigate("/activity")
+        //         props.setUser(json.data.user)
+        //         props.setIsLoggedIn(true)
+                
+        //     }
+        //     else{
+        //         setError((state) => ({ ...state, form: "Something went wrong with registration." }))
+        //     }
+        // }catch(err) {
+        //     const message = err?.response?.data?.error?.message
+        //     setError((state) => ({ ...state, form: message ? String(message) : String(err) }))
+        //     console.log(err)
+        // }
+        // console.log(error)
     }
 
     return (
@@ -74,5 +102,6 @@ export default function LoginForm(props) {
                 <button className="submit-login" onClick={loginUser}>Login</button>
                 {error.form ? (<p className="error">{error.form}</p>) : null}
             </form>
+            <p>Don't have a lifetracker account? <Link to="/register">Register here</Link></p>
         </div>
     )}

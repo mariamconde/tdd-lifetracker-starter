@@ -3,45 +3,44 @@ import { createContext, useState, useContext, useEffect } from "react";
 import API from "../services/apiClient"
 import { useAuthContext} from "./auth";
 
-const NutritionContext = createContext(null)
+const ActivityContext = createContext(null)
 
-export const NutritionontextProvider = ({children}) => {
-    const [nutritions, setNutritions] = useState([])
-    const [initialized, setInitialized] = useState(false)
+export const ActivityContextProvider = ({children}) => {
+    const [activity, setActivity] = useState(null)
+    const [initialized, setInitialzed] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const {user} = useAuthContext()
-const fetchNutritions = async () => {
+
+    const fetchActivity = async () => {
                     setIsLoading(true)
                     setError(null)
-                    const {data, error} = await API.fetchNutrition()
+                    const {data, error} = await API.fetchActivity()
                     if(data){
-                        setNutritions(data.nutrition)
+                        setActivity(data)
                     }
                     if(error){
                         setError(error)
                     }
-                setInitialized(true)
+                setInitialzed(true)
                 setIsLoading(false)
             }
-    useEffect(() => {    
-        
 
+    useEffect(() => {    
             const token = localStorage.getItem("my_token")
             if (token && user) {
               API.setToken(token)
-              fetchNutritions()
+              fetchActivity()
             }
 
-    }, [setNutritions])
+    }, [setActivity])
 
-    const nutritionValue = {fetchNutritions, nutritions, setNutritions, initialized, setInitialized, isLoading, setIsLoading, error, setError}
-    
+    const activityValue = {fetchActivity, activity, setActivity, initialized, setInitialzed, isLoading, setIsLoading, error, setError}
     return (
-        <NutritionContext.Provider value={nutritionValue}>
+        <ActivityContext.Provider value={activityValue}>
             <>{children}</>
-        </NutritionContext.Provider>
+        </ActivityContext.Provider>
     )
 }
 
-export const useNutritionContext = () => useContext(NutritionContext)
+export const useActivityContext = () => useContext(ActivityContext)
