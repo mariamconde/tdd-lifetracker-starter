@@ -34,7 +34,7 @@ export default function NutritionOverview({nutrition}) {
         {error? <p className="error">{error}</p> : null}
         <Link to="/nutrition/create"><button id="record">Record Nutrition</button></Link>
          
-        
+  
         {isLoading? <Loading/> : <NutritionFeed nutritions={copy}></NutritionFeed>}
     </div>
   )

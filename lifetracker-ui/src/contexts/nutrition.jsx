@@ -5,7 +5,7 @@ import { useAuthContext} from "./auth";
 
 const NutritionContext = createContext(null)
 
-export const NutritionontextProvider = ({children}) => {
+export const NutritionContextProvider = ({children}) => {
     const [nutritions, setNutritions] = useState([])
     const [initialized, setInitialized] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +27,7 @@ const fetchNutritions = async () => {
     useEffect(() => {    
         
 
-            const token = localStorage.getItem("my_token")
+            const token = localStorage.getItem("lifetracker_token")
             if (token && user) {
               API.setToken(token)
               fetchNutritions()

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useParams } from "react-router-dom"
 import NotFound from "components/NotFound/NotFound"
-// import NutritionCard from "components/NutritionCard/NutritionCard"
+import NutritionCard from "components/NutritionCard/NutritionCard"
 import API from "../../services/apiClient"
 import { useState, useEffect } from "react"
 import Loading from "components/Loading/Loading"

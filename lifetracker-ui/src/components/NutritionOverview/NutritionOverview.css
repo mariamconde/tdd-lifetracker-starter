@@ -2,11 +2,11 @@
     font-size: large;
     margin: 8px;
     padding: 8px;
-    background: linear-gradient(to right, #8d5652 50%, #ffffff 50%);
+    background: linear-gradient(to right, #c57482 50%, #ffffff 50%);
     background-size: 200% 100%;
     background-position: 100% 0;
     transition: background-position 0.3s;
-    color: #8d5652;
+    color: #c57482;
     border: none;
 }
 

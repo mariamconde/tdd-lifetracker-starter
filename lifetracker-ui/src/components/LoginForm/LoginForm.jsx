@@ -56,33 +56,6 @@ export default function LoginForm() {
             API.setToken(data.token)
         }
         console.log(data, error)
-        //placeholder, handled by contexts
-        // try{
-        //     const json = await axios.post("http://localhost:3001/auth/login", {
-        //         email: form.email,
-        //         password: form.password,
-        //     })
-        //     if(json?.data?.user){
-        //         props.setAppState(json.data)
-        //         setForm({
-        //             email: "",
-        //             password: ""
-        //           })
-        //         console.log(json.data)
-        //         navigate("/activity")
-        //         props.setUser(json.data.user)
-        //         props.setIsLoggedIn(true)
-                
-        //     }
-        //     else{
-        //         setError((state) => ({ ...state, form: "Something went wrong with registration." }))
-        //     }
-        // }catch(err) {
-        //     const message = err?.response?.data?.error?.message
-        //     setError((state) => ({ ...state, form: message ? String(message) : String(err) }))
-        //     console.log(err)
-        // }
-        // console.log(error)
     }
 
     return (

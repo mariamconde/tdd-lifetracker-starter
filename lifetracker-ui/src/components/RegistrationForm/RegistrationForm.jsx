@@ -4,7 +4,7 @@ import API from "../../services/apiClient"
 import { useNavigate, Link } from "react-router-dom"
 import "./RegistrationForm.css"
 import { useAuthContext } from "../../contexts/auth"
-import { useActivityContext } from "../../contexts/activity"
+ import { useActivityContext } from "../../contexts/activity"
 import { useNutritionContext } from "../../contexts/nutrition"
 
 export default function RegistrationForm() {

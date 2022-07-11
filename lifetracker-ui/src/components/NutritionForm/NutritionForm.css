@@ -25,7 +25,7 @@
 .submit-nutrition{
     padding: 5px;
     width: 40vw;
-    background-color: #8d5652;
+    background-color: #c57482;
     color: white;
     border: none;
     height: 40px;
@@ -44,7 +44,7 @@
 }
 
 .submit-nutrition:hover{
-    color: #8d5652;
+    color: #c57482;
     background-color: white;
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;

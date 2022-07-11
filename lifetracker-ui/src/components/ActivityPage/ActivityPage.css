@@ -1,0 +1,9 @@
+.activity-page {
+    min-height: 100vh;
+    background-position:center;
+    background-size: 130vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

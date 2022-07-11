@@ -6,7 +6,7 @@ class ApiClient {
     constructor(remoteHostUrl) {
         this.remoteHostUrl = remoteHostUrl
         this.token = null
-        this.tokenName = "my_token"
+        this.tokenName = "lifetracker_token"
     }
 
     setToken(token){
@@ -48,11 +48,11 @@ class ApiClient {
     }
 
     async createNutrition(nutrition){
-        return await this.request({endpoint: `nutrition`, method: `POST`, data: nutrition})
+        return await this.request({endpoint: `nutrition/create`, method: `POST`, data: nutrition})
     }
 
     async fetchNutrition(){
-        return await this.request({endpoint: `nutrition`, method: `GET`, data: null})
+        return await this.request({endpoint: `nutrition`, method: `GET`})
     }
 
     async fetchNutritionById(nutritionId){

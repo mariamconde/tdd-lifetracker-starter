@@ -27,7 +27,7 @@ export const ActivityContextProvider = ({children}) => {
             }
 
     useEffect(() => {    
-            const token = localStorage.getItem("my_token")
+            const token = localStorage.getItem("lifetracker_token")
             if (token && user) {
               API.setToken(token)
               fetchActivity()
@@ -44,3 +44,4 @@ export const ActivityContextProvider = ({children}) => {
 }
 
 export const useActivityContext = () => useContext(ActivityContext)
+

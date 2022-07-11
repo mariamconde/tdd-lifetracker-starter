@@ -13,7 +13,7 @@ export default function NutritionForm(props) {
     const [form, setForm] = useState({
         name: "",
         calories: 1,
-        imageUrl: "",
+        image_url: "",
         category: "",
         quantity: 1
       })
@@ -21,7 +21,7 @@ export default function NutritionForm(props) {
     const [posted, setPosted] = useState(false)
     const navigate = useNavigate()
     const {fetchActivity} = useActivityContext()
-    const {fetchNutritions} = useNutritionContext()
+    const {nutritionValue} = useNutritionContext()
     
     useEffect(() => {
         if(posted){
@@ -51,7 +51,7 @@ export default function NutritionForm(props) {
 
         const {data, err} = await API.createNutrition({name: form.name,
                     calories: form.calories,
-                    imageUrl: form.imageUrl,
+                    image_url: form.image_url,
                     category: form.category,
                     quantity: form.quantity})
 
@@ -60,12 +60,13 @@ export default function NutritionForm(props) {
             setForm({
                     name: "",
                     calories: 1,
-                    imageUrl: "",
+                    image_url: "",
                     category: "",
                     quantity: 1
                 })
             setPosted(true)
-            fetchNutritions()
+            navigate("/nutrition")
+            nutritionValue.fetchNutritions()
             fetchActivity()
             
         }
@@ -93,9 +94,9 @@ export default function NutritionForm(props) {
         </div>
         <div className="InputField">
             <label>Image Url</label>
-            <input className="form-input" type="url" name="imageUrl"
+            <input className="form-input" type="url" name="image_url"
                             placeholder="http://www.food-image.com/1"
-                            value={form.imageUrl}
+                            value={form.image_url}
                             onChange={handleOnInputChange}/>
         </div>
         <div className="InputField">

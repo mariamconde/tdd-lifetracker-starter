@@ -27,15 +27,5 @@ router.post("/create", security.requireAuthenticatedUser, async (req, res, next)
         next(err)
     }
 })
-/*
-router.get("/id/:nutritionId", security.requireAuthenticatedUser, async(req, res, next) => {
-    try{
-        const nutrition = await Nutrition.fetchNutritionById(Number(req.params.nutritionId))
-        return res.status(200).json({nutrition})
-    }catch(err){
-        next(err)
-    }
-})
-*/
 
 module.exports = router

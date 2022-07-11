@@ -19,7 +19,7 @@ export const AuthContextProvider = ({children}) => {
           }
         }
     
-        const token = localStorage.getItem("my_token")
+        const token = localStorage.getItem("lifetracker_token")
         if (token) {
           API.setToken(token)
           fetchUser()
