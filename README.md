@@ -2,7 +2,7 @@
 
 Submitted by: **Mariam Conde**
 
-Deployed Application: ([ADD_LINK_HERE](https://lifetracker-front.surge.sh/))
+Deployed Application: https://lifetracker-front.surge.sh/
 
 ## Application Features
 
