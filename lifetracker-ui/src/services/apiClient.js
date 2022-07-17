@@ -73,8 +73,7 @@ class ApiClient {
     }
 }
 
-let REACT_APP_REMOTE_HOST_URL = "https://lftc.herokuapp.com"
 
-const API =  new ApiClient("http://localhost:3001")
+const API =  new ApiClient("https://lifetracker-back.herokuapp.com")
 
 export default API
